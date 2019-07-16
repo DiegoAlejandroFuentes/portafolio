@@ -1,0 +1,31 @@
+create database callcenter;
+use callcenter;
+create TABLE agente(DOCUMENTO_AGENT CHARACTER(15) not null, NOMBRE_AGENT CHARACTER(255) NOT null, EDAD_AGENT int not null, GENERO_AGENT CHARACTER(9) not null, PRIMARY KEY(DOCUMENTO_AGENT)); 
+
+create TABLE estado(COD_ESTADO CHARACTER(15) not null, NOMBRE_ESTADO CHARACTER(25) NOT null,  PRIMARY KEY(COD_ESTADO));
+ 
+create TABLE estado_agente(COD_ESTAGEN INT not null AUTO_INCREMENT, FECHA_ESTAGEN DATE not null, HORA_ESTAGEN TIME NOT NULL, DOCUMENTO_AGENT CHARACTER(15) not null, COD_ESTADO CHARACTER(15) not null, PRIMARY KEY(COD_ESTAGEN), FOREIGN KEY(DOCUMENTO_AGENT) REFERENCES AGENTE(DOCUMENTO_AGENT), FOREIGN KEY(COD_ESTADO) REFERENCES ESTADO(COD_ESTADO));
+
+insert into agente values("1014288259", "Diego Alejandro Fuentes Barreto", 21, "Masculino");
+insert into agente values("1030588484", "Miguel Angel Lozano Barrera", 28, "Masculino");
+insert into estado values("ACTV01", "ACTIVO");
+insert into estado values("INTV01", "INACTIVO);
+insert into estado values("BREK01", "BREAK");
+
+insert into estado values("LNCH01", "LUNCH");
+
+insert into estado values("CPON01", "CAPACITACION");
+
+insert into estado values("RETR01", "RETROALIEMNTACION");
+
+Insert into estado_agente (FECHA_ESTAGEN, HORA_ESTAGEN, DOCUMENTO_AGENT, COD_ESTADO) values ("2019/04/1", "08:00:17", "1014288259", "ACTV01");
+Insert into estado_agente (FECHA_ESTAGEN, HORA_ESTAGEN, DOCUMENTO_AGENT, COD_ESTADO) values ("2019/04/1", "08:00:18", "1030588484", "ACTV01");
+Insert into estado_agente (FECHA_ESTAGEN, HORA_ESTAGEN, DOCUMENTO_AGENT, COD_ESTADO) values ("2019/04/1", "10:00:21", "1014288259", "BREK01");
+
+SELECT * FROM estado_agente
+WHERE DOCUMENTO_AGENT="1014288259" AND estado_agente.FECHA_ESTAGEN
+BETWEEN "2019/04/1"AND "2019/04/30";
+
+SELECT * FROM estado_agente
+WHERE DOCUMENTO_AGENT="1030588484" AND estado_agente.FECHA_ESTAGEN
+BETWEEN "2019/04/1"AND "2019/04/30";
